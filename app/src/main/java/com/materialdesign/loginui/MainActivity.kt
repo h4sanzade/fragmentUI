@@ -13,37 +13,49 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up Google icon click listener
+
         binding.googleIcon.setOnClickListener {
-            navigateToFragment(GoogleFragment())
+            showFragmentInNewContainer(GoogleFragment())
         }
 
-        // Set up Facebook icon click listener
+
         binding.facebookicon.setOnClickListener {
-            navigateToFragment(FacebookFragment())
+            showFragmentInNewContainer(FacebookFragment())
         }
 
-        // Set up Apple icon click listener
+
         binding.iconApple.setOnClickListener {
-            navigateToFragment(AppleFragment())
+            showFragmentInNewContainer(AppleFragment())
         }
 
-        // Set up Sign Up button click listener
+
         binding.signUpButton.setOnClickListener {
             val email = binding.emailInputEditText.text.toString()
             val password = binding.passEditText.text.toString()
 
-            // Validate inputs (optional)
+
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                navigateToFragment(SignUpSuccessFragment.newInstance(email, password))
+                showFragmentInNewContainer(SignUpSuccessFragment.newInstance(email, password))
             }
         }
     }
 
-    private fun navigateToFragment(fragment: Fragment) {
+    private fun showFragmentInNewContainer(fragment: Fragment) {
+
+        binding.mainContent.visibility = android.view.View.GONE
+
+        binding.fragmentContainer.visibility = android.view.View.VISIBLE
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main, fragment)
-            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+
+    fun returnToMainScreen() {
+
+        binding.mainContent.visibility = android.view.View.VISIBLE
+
+        binding.fragmentContainer.visibility = android.view.View.GONE
     }
 }

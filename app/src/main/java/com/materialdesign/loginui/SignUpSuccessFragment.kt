@@ -33,26 +33,23 @@ class SignUpSuccessFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Display the email and password
+
         binding.emailValue.text = email
         binding.passwordValue.text = password
 
-        // Set up back button click listener
+
         binding.backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+
+            (requireActivity() as MainActivity).returnToMainScreen()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     companion object {
         private const val ARG_EMAIL = "email"
         private const val ARG_PASSWORD = "password"
 
-        @JvmStatic
         fun newInstance(email: String, password: String) =
             SignUpSuccessFragment().apply {
                 arguments = Bundle().apply {

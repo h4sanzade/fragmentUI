@@ -24,12 +24,9 @@ class GoogleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+
+            (requireActivity() as MainActivity).returnToMainScreen()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
