@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="googl"
-        android:layout_marginBottom="20dp">
-
-    </FrameLayout>
     <TextView
         android:id="@+id/createAccount"
         android:layout_width="wrap_content"

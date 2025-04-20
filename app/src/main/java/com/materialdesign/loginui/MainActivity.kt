@@ -1,43 +1,49 @@
 package com.materialdesign.loginui
 
-import android.content.Intent
-import android.media.Image
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.textfield.TextInputLayout
+import androidx.fragment.app.Fragment
 import com.materialdesign.loginui.databinding.ActivityMainBinding
-import kotlin.math.sign
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.facebookicon.setOnClickListener {
-
-        }
-
-        binding.iconApple.setOnClickListener {
-
-        }
-
+        // Set up Google icon click listener
         binding.googleIcon.setOnClickListener {
-
+            navigateToFragment(GoogleFragment())
         }
 
+        // Set up Facebook icon click listener
+        binding.facebookicon.setOnClickListener {
+            navigateToFragment(FacebookFragment())
+        }
+
+        // Set up Apple icon click listener
+        binding.iconApple.setOnClickListener {
+            navigateToFragment(AppleFragment())
+        }
+
+        // Set up Sign Up button click listener
         binding.signUpButton.setOnClickListener {
+            val email = binding.emailInputEditText.text.toString()
+            val password = binding.passEditText.text.toString()
 
+            // Validate inputs (optional)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                navigateToFragment(SignUpSuccessFragment.newInstance(email, password))
+            }
         }
+    }
+
+    private fun navigateToFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
